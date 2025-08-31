@@ -29,12 +29,6 @@
     };
   };
 
-  #------- [ ENVIRONMENT ] -------#
-  environment.etc."bashrc.local".text = ''
-    # Silence "hash: hashing disabled" without changing Nix’s behavior
-    hash() { return 0; }
-  '';
-
   #------- [ DESKTOP / MAIN ] -------#
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.kyle = {
