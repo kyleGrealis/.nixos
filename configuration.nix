@@ -1,16 +1,15 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, ... }:
-
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
-
-
+  config,
+  pkgs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   #------- [ BOOT OPTIONS ] -------#
   boot = {
@@ -30,14 +29,12 @@
     };
   };
 
-
-
-	#------- [ DESKTOP / MAIN ] -------#
+  #------- [ DESKTOP / MAIN ] -------#
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.kyle = {
     isNormalUser = true;
     description = "Kyle";
-    extraGroups = [ "networkmanager" "wheel" "input" ];
+    extraGroups = ["networkmanager" "wheel" "input"];
   };
 
   # Set your time zone.
@@ -71,8 +68,6 @@
     variant = "";
   };
 
-
-
   #------- [ NVIDIA CONFIGURATION ] -------#
   # Ref: https://wiki.nixos.org/wiki/NVIDIA
   hardware.graphics.enable = true;
@@ -96,40 +91,36 @@
   };
 
   boot = {
-    blacklistedKernelModules = [ "nouveau" ];  # default when using proprietary drivers
-    kernelParams = [ "nvidia-drm.modeset=1" ];
+    blacklistedKernelModules = ["nouveau"]; # default when using proprietary drivers
+    kernelParams = ["nvidia-drm.modeset=1"];
   };
-  
+
   environment.variables = {
     LIBVA_DRIVER_NAME = "nvidia";
   };
 
-
-  
   #------- [ SET UP EXTERNALS ] -------#
   # For Magic Trackpad bluetooth
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
   };
-  
+
   # ZSA Voyager keyboard support
   hardware.keyboard.zsa.enable = true;
 
-
-
-	#------- [ NETWORKING ] -------#
+  #------- [ NETWORKING ] -------#
   services.openssh.enable = true;
-  
+
   networking = {
     hostName = "nixos";
     networkmanager.enable = true;
-    
+
     # Firewall configuration for Tailscale:
     firewall = {
-      enable = true;                         # keep firewall enabled for security
-      checkReversePath = "loose";            # Required for subnet routing
-      trustedInterfaces = [ "tailscale0" ];  # Trust the Tailscale interface
+      enable = true; # keep firewall enabled for security
+      checkReversePath = "loose"; # Required for subnet routing
+      trustedInterfaces = ["tailscale0"]; # Trust the Tailscale interface
     };
 
     # Tailnet IP addresses for Raspberry Pi devices
@@ -138,13 +129,11 @@
       100.108.174.90  pi4
     '';
   };
-  
+
   services.tailscale = {
     enable = true;
-    useRoutingFeatures = "client";           # Allow using exit nodes
+    useRoutingFeatures = "client"; # Allow using exit nodes
   };
-  
-
 
   #------- [ MOUNTING piCloud SHARED DRIVE OVER TAILNET ] -------#
   # Mount piCloud over CIFS/SMB:
@@ -156,14 +145,14 @@
       "uid=1000"
       "gid=1000"
       "vers=3.0"
-      "nofail"                             # Don't fail boot if mount fails
-      "_netdev"                            # Mark as a network device
-      "x-systemd.automount"                # Automount on access
+      "nofail" # Don't fail boot if mount fails
+      "_netdev" # Mark as a network device
+      "x-systemd.automount" # Automount on access
       "x-systemd.requires=tailscaled.service"
       "x-systemd.requires=network-online.target"
 
       # timing delays to prevent boot or shutdown hanging:
-      "x-systemd.idle-timeout=300"         # 5 minutes of inactivity
+      "x-systemd.idle-timeout=300" # 5 minutes of inactivity
       "x-systemd.device-timeout=5s"
       "x-systemd.mount-timeout=5s"
     ];
@@ -171,14 +160,10 @@
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-
-
   #------- [ RULES ] -------#
   systemd.tmpfiles.rules = [
     "d /home/kyle/piCloud 0755 kyle users -"
   ];
-
-
 
   #------- [ PACKAGES ] -------#
   # Allow unfree packages
@@ -186,13 +171,13 @@
 
   # Import unstable channel
   nixpkgs.config.packageOverrides = pkgs: {
-    unstable = import <nixos-unstable> { config = pkgs.config; };
+    unstable = import <nixos-unstable> {config = pkgs.config;};
   };
 
   environment = {
-
     systemPackages = with pkgs; [
       # Terminal essentials
+      alejandra
       bash
       bash-completion
       btop
@@ -264,10 +249,10 @@
       quarto
 
       # Input device tools
-      keymapp     # For ZSA Voyager configuration
-      libinput    # For trackpad debugging
+      keymapp # For ZSA Voyager configuration
+      libinput # For trackpad debugging
       libinput-gestures
-      solaar      # For Logitech devices
+      solaar # For Logitech devices
 
       # For NVIDIA
       (writeShellScriptBin "nvidia-offload" ''
@@ -277,18 +262,14 @@
         export __VK_LAYER_NV_optimus=NVIDIA_only
         exec "$@"
       '')
-
     ];
 
     variables = {};
-
   };
-
-
 
   #------- [ SERVICES ] -------#
   programs.ssh.startAgent = true;
-            
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -307,13 +288,11 @@
     # no need to redefine it in your config for now)
     #media-session.enable = true;
   };
-          
+
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
 
   services.flatpak.enable = true;
-
-
 
   #------- [ FONT SETTINGS ] -------#
   fonts = {
@@ -324,13 +303,13 @@
       font-awesome
       fira-code
     ];
-    
+
     fontconfig = {
       enable = true;
       defaultFonts = {
-        monospace = [ "FiraCode Nerd Font" "Fira Code" ];
-        serif = [ "Noto Serif" ];
-        sansSerif = [ "Noto Sans" ];
+        monospace = ["FiraCode Nerd Font" "Fira Code"];
+        serif = ["Noto Serif"];
+        sansSerif = ["Noto Sans"];
       };
     };
   };
@@ -338,5 +317,4 @@
   nix.settings.auto-optimise-store = true;
 
   system.stateVersion = "25.05";
-
 }
