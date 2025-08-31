@@ -205,6 +205,7 @@
       tldr
       tree
       unzip
+      vim
       wget
       xclip
       yazi
@@ -316,7 +317,10 @@
     };
   };
 
-  nix.settings.auto-optimise-store = true;
+  nix.settings = {
+    auto-optimise-store = true;
+    experimental-features = ["nix-command" "flakes"];
+  };
 
   system.stateVersion = "25.05";
 }
