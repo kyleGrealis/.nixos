@@ -206,6 +206,7 @@
       unzip
       wget
       xclip
+      yazi
       zlib
 
       # Desktop applications
