@@ -31,4 +31,9 @@ git commit -am "$gen"
 
 # Return to original directory
 popd
+
+# Refresh shell environment to prevent hashing interference with new $PATH variables
+# Issue: immediately running `which {newPkg}` wouldn't find the newly-installed {newPkg}
+echo "Refreshing shell environment..."
+exec bash
 ```
