@@ -197,6 +197,7 @@
       libxml2
       micro
       neofetch
+      neovim
       nmap
       nix-bash-completions
       nix-prefetch-git
