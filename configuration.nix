@@ -369,6 +369,7 @@ in {
 
   #------- [ SERVICES ] -------#
   programs.ssh.startAgent = true;
+  programs.direnv.enable = true;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
