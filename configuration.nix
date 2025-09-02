@@ -274,6 +274,7 @@ in {
       btop
       cifs-utils
       curl
+      direnv
       gfortran
       git
       gnumake
