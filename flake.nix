@@ -36,6 +36,7 @@
           ./modules/desktop.nix
           ./modules/development.nix
           ./modules/nvidia.nix
+          ./modules/packages.nix
           ./modules/tailscale.nix
         ];
       };
