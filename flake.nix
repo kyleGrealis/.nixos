@@ -24,19 +24,15 @@
         system = "x86_64_linux";
         modules = [
           # Apply the overlay to disable Tailscale tests
-          ({
-            config,
-            pkgs,
-            ...
-          }: {
+          ({ config, pkgs, ... }: {
             nixpkgs.overlays = [tailscale-overlay];
           })
           ./configuration.nix
+          ./modules/applications.nix
           ./modules/audio.nix
           ./modules/desktop.nix
           ./modules/development.nix
           ./modules/nvidia.nix
-          ./modules/packages.nix
           ./modules/tailscale.nix
         ];
       };
