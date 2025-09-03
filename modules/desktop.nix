@@ -1,6 +1,6 @@
 # modules/desktop.nix
 
-{ config, lib, pkgs, ... }: {
+{ config, server, pkgs, ... }: {
 
   server.xserver = {
 
