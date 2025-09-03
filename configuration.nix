@@ -1,11 +1,7 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{
-  config,
-  pkgs,
-  ...
-}: {
+{ config, pkgs, ... }: {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -53,19 +49,6 @@
     LC_PAPER = "en_US.UTF-8";
     LC_TELEPHONE = "en_US.UTF-8";
     LC_TIME = "en_US.UTF-8";
-  };
-
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
   };
 
   #------- [ SET UP EXTERNALS ] -------#
@@ -226,25 +209,6 @@
 
   services.flatpak.enable = true;
 
-  #------- [ FONT SETTINGS ] -------#
-  fonts = {
-    packages = with pkgs; [
-      noto-fonts
-      noto-fonts-cjk-sans
-      noto-fonts-emoji
-      font-awesome
-      fira-code
-    ];
-
-    fontconfig = {
-      enable = true;
-      defaultFonts = {
-        monospace = ["FiraCode Nerd Font" "Fira Code"];
-        serif = ["Noto Serif"];
-        sansSerif = ["Noto Sans"];
-      };
-    };
-  };
 
   nix.settings = {
     auto-optimise-store = true;

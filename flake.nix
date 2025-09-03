@@ -33,6 +33,7 @@
           })
           ./configuration.nix
           ./modules/audio.nix
+          ./modules/desktop.nix
           ./modules/nvidia.nix
           ./modules/tailscale.nix
         ];
