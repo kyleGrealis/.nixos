@@ -1,8 +1,8 @@
 # modules/desktop.nix
 
-{ config, server, pkgs, ... }: {
+{ config, lib, pkgs, ... }: {
 
-  server.xserver = {
+  services.xserver = {
 
     # Enable the X11 windowing system.
     enable = true;
