@@ -1,7 +1,9 @@
-
-{ config, lib, pkgs, ... }:
-
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   # Tailscale home mode script
   tailscale-home = pkgs.writeShellScriptBin "tailscale-home" ''
     echo "🏠 Switching to home mode..."
@@ -18,22 +20,21 @@ let
 
   # Tailscale protect mode script
   tailscale-protect = pkgs.writeShellScriptBin "tailscale-protect" ''
-     PI5_IP="100.125.173.109"
-     echo "🛡️ Switching to protection mode..."
-     /run/wrappers/bin/sudo ${pkgs.tailscale}/bin/tailscale up --exit-node=$PI5_IP
+    PI5_IP="100.125.173.109"
+    echo "🛡️ Switching to protection mode..."
+    /run/wrappers/bin/sudo ${pkgs.tailscale}/bin/tailscale up --exit-node=$PI5_IP
 
-     # Verification logic
-     STATUS=$(${pkgs.tailscale}/bin/tailscale status)
-     if echo "$STATUS" | grep -q "; exit node;"; then
-       echo "⚠️  -------------------- WARNING!! ---------------------"
-       echo "✅ Exit node protection ENABLED!! All traffic now routes through your Tailnet."
-       echo "⚠️  ----------------------------------------------------"
-     else
-       echo "❌ Something went wrong. Please check tailscale status."
-     fi
+    # Verification logic
+    STATUS=$(${pkgs.tailscale}/bin/tailscale status)
+    if echo "$STATUS" | grep -q "; exit node;"; then
+      echo "⚠️  -------------------- WARNING!! ---------------------"
+      echo "✅ Exit node protection ENABLED!! All traffic now routes through your Tailnet."
+      echo "⚠️  ----------------------------------------------------"
+    else
+      echo "❌ Something went wrong. Please check tailscale status."
+    fi
   '';
-in
-{
+in {
   # Tailscale service configuration
   services.tailscale = {
     enable = true;
@@ -43,10 +44,10 @@ in
   # Firewall configuration for Tailscale
   networking = {
     firewall = {
-      trustedInterfaces = [ "tailscale0" ];
+      trustedInterfaces = ["tailscale0"];
       checkReversePath = "loose";
     };
-    
+
     # Tailnet IP addresses for Raspberry Pi devices
     extraHosts = ''
       100.125.173.109 pi5
@@ -119,4 +120,3 @@ in
     "f /var/log/tailscale-autoswitch.log 0644 root root -"
   ];
 }
-
