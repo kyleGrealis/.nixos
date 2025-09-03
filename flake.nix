@@ -32,7 +32,9 @@
           ./modules/audio.nix
           ./modules/desktop.nix
           ./modules/development.nix
+          ./modules/hardware.nix
           ./modules/nvidia.nix
+          ./modules/services.nix
           ./modules/tailscale.nix
         ];
       };

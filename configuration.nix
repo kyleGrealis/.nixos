@@ -3,7 +3,6 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 { config, pkgs, ... }: {
   imports = [
-    # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
 
@@ -51,68 +50,14 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  #------- [ SET UP EXTERNALS ] -------#
-  # For Magic Trackpad bluetooth
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = true;
-  };
 
-  # ZSA Voyager keyboard support
-  hardware.keyboard.zsa.enable = true;
+  networking.hostName = "nixos";
 
-  #------- [ NETWORKING ] -------#
-  services.openssh.enable = true;
-
-  networking = {
-    hostName = "nixos";
-    networkmanager.enable = true;
-  };
-
-  #------- [ MOUNTING piCloud SHARED DRIVE OVER TAILNET ] -------#
-  # Mount piCloud over CIFS/SMB:
-  fileSystems."/home/kyle/piCloud" = {
-    device = "//100.125.173.109/piCloud";
-    fsType = "cifs";
-    options = [
-      "credentials=/home/kyle/.nixos/smb-secrets"
-      "uid=1000"
-      "gid=1000"
-      "vers=3.0"
-      "nofail" # Don't fail boot if mount fails
-      "_netdev" # Mark as a network device
-      "x-systemd.automount" # Automount on access
-      "x-systemd.requires=tailscaled.service"
-      "x-systemd.requires=network-online.target"
-
-      # timing delays to prevent boot or shutdown hanging:
-      "x-systemd.idle-timeout=300" # 5 minutes of inactivity
-      "x-systemd.device-timeout=5s"
-      "x-systemd.mount-timeout=5s"
-    ];
-  };
+  
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   #------- [ RULES ] -------#
-  systemd.tmpfiles.rules = [
-    "d /home/kyle/piCloud 0755 kyle users -"
-  ];
-
-
-  #------- [ SERVICES ] -------#
-  programs.ssh.startAgent = true;
-  programs.direnv.enable = true;
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
-  
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  services.libinput.enable = true;
-
-  services.flatpak.enable = true;
 
 
   nix.settings = {
