@@ -230,7 +230,7 @@ in {
     device = "//100.125.173.109/piCloud";
     fsType = "cifs";
     options = [
-      "credentials=/etc/nixos/smb-secrets"
+      "credentials=/home/kyle/.nixos/smb-secrets"
       "uid=1000"
       "gid=1000"
       "vers=3.0"
