@@ -114,6 +114,7 @@
       alejandra
       bash
       bash-completion
+      bat
       btop
       cifs-utils
       curl
