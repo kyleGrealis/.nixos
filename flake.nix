@@ -32,6 +32,7 @@
             nixpkgs.overlays = [tailscale-overlay];
           })
           ./configuration.nix
+          ./modules/audio.nix
           ./modules/nvidia.nix
           ./modules/tailscale.nix
         ];
