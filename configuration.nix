@@ -110,43 +110,7 @@
 
   environment = {
     systemPackages = with pkgs; [
-      # Terminal essentials
-      alejandra
-      bash
-      bash-completion
-      bat
-      btop
-      cifs-utils
-      curl
-      direnv
-      gfortran
-      git
-      gnumake
-      htop
-      libgcc
-      libxml2
-      micro
-      fastfetch
-      neovim
-      nmap
-      nix-bash-completions
-      nix-prefetch-git
-      openssl
-      pkg-config-unwrapped
-      python3Full
-      python312Packages.pip
-      ripgrep
-      rsync
-      samba
-      stow
-      tldr
-      tree
-      unzip
-      vim
-      wget
-      xclip
-      yazi
-      zlib
+      
 
       # Desktop applications
       ardour
@@ -177,10 +141,7 @@
 
       # System tools
       adwaita-icon-theme
-      nodejs
-      os-prober
       pandoc
-      which
 
       # R tools
       R

@@ -34,6 +34,7 @@
           ./configuration.nix
           ./modules/audio.nix
           ./modules/desktop.nix
+          ./modules/development.nix
           ./modules/nvidia.nix
           ./modules/tailscale.nix
         ];
