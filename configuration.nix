@@ -27,10 +27,6 @@
       cleanOnBoot = true;
       useTmpfs = true;
     };
-
-    # NVIDIA configs from below
-    blacklistedKernelModules = ["nouveau"]; # default when using proprietary drivers
-    kernelParams = ["nvidia-drm.modeset=1"];
   };
 
   #------- [ DESKTOP / MAIN ] -------#
@@ -70,37 +66,6 @@
   services.xserver.xkb = {
     layout = "us";
     variant = "";
-  };
-
-  #------- [ NVIDIA CONFIGURATION ] -------#
-  # Ref: https://wiki.nixos.org/wiki/NVIDIA
-  hardware.graphics.enable = true;
-
-  # For offloading, `modesetting` is needed additionally,
-  # otherwise the X-server will be running permanently on nvidia,
-  # thus keeping the GPU always on (see `nvidia-smi`).
-  services.xserver.videoDrivers = [
-    "modesetting"
-    "nvidia"
-  ];
-
-  hardware.nvidia = {
-    open = true;
-    # package = config.boot.kernelPackages.nvidiaPackages.stable; # Default
-    prime = {
-      offload.enable = true;
-      intelBusId = "PCI:0:2:0";
-      nvidiaBusId = "PCI:1:0:0";
-    };
-  };
-
-  # boot = {
-  #   blacklistedKernelModules = ["nouveau"]; # default when using proprietary drivers
-  #   kernelParams = ["nvidia-drm.modeset=1"];
-  # };
-
-  environment.variables = {
-    LIBVA_DRIVER_NAME = "nvidia";
   };
 
   #------- [ SET UP EXTERNALS ] -------#
@@ -217,8 +182,6 @@
       kitty
       libreoffice
       nextcloud-client
-      nvidia-modprobe
-      nvtopPackages.full
       obs-studio
       positron-bin
       rstudio
@@ -244,15 +207,6 @@
       libinput # For trackpad debugging
       libinput-gestures
       solaar # For Logitech devices
-
-      # For NVIDIA
-      (writeShellScriptBin "nvidia-offload" ''
-        export __NV_PRIME_RENDER_OFFLOAD=1
-        export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
-        export __GLX_VENDOR_LIBRARY_NAME=nvidia
-        export __VK_LAYER_NV_optimus=NVIDIA_only
-        exec "$@"
-      '')
     ];
 
     variables = {};

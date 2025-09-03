@@ -31,8 +31,8 @@
           }: {
             nixpkgs.overlays = [tailscale-overlay];
           })
-          ./hardware-configuration.nix
           ./configuration.nix
+          ./modules/nvidia.nix
           ./modules/tailscale.nix
         ];
       };
