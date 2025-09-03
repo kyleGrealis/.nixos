@@ -33,9 +33,11 @@
           ./modules/desktop.nix
           ./modules/development.nix
           ./modules/hardware.nix
+          ./modules/networking.nix
           ./modules/nvidia.nix
           ./modules/services.nix
           ./modules/tailscale.nix
+          ./modules/user.nix
         ];
       };
     };
