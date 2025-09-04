@@ -41,6 +41,14 @@ in {
     useRoutingFeatures = "client";
   };
 
+  # Add PATH to NetworkManager-dispatcher service
+  systemd.services.NetworkManager-dispatcher.path = [
+    pkgs.networkmanager    # for nmcli
+    pkgs.tailscale        # for tailscale
+    pkgs.coreutils        # for basic commands
+    pkgs.bash             # for shell commands
+  ];
+
   # Firewall configuration for Tailscale
   networking = {
     firewall = {
