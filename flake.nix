@@ -2,44 +2,60 @@
   description = "Kyle's NixOS Flake";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs.url = "nixpkgs/nixos-25.05";
+    nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    ...
-  }: let
-    lib = nixpkgs.lib;
+  outputs = { self, nixpkgs, nixpkgs-unstable, ... }: 
+  
+  let
+    system = "x86_64-linux";
+    
+    overlay-unstable = final: prev: {
+      # unstable = nixpkgs-unstable.legacyPackages.${prev.system};  # not for Unfree
+      # Using this variant since unfree packages are needed
+      # https://nixos.wiki/wiki/Flakes#Importing_packages_from_multiple_channels
+      unstable = import nixpkgs-unstable {
+        inherit system;
+        config.allowUnfree = true;
+      };
+    };
 
     # Create an overlay to disable Tailscale tests
-    tailscale-overlay = final: prev: {
+    overlay-tailscale = final: prev: {
       tailscale = prev.tailscale.overrideAttrs (oldAttrs: {
         doCheck = false; # Disable the failing tests
       });
     };
+
+
   in {
-    nixosConfigurations = {
-      nixos = lib.nixosSystem {
-        system = "x86_64_linux";
-        modules = [
-          # Apply the overlay to disable Tailscale tests
-          ({ config, pkgs, ... }: {
-            nixpkgs.overlays = [tailscale-overlay];
-          })
-          ./configuration.nix
-          ./modules/applications.nix
-          ./modules/audio.nix
-          ./modules/desktop.nix
-          ./modules/development.nix
-          ./modules/hardware.nix
-          ./modules/networking.nix
-          ./modules/nvidia.nix
-          ./modules/services.nix
-          ./modules/tailscale.nix
-          ./modules/user.nix
-        ];
-      };
+    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+
+      inherit system;
+      modules = [
+
+        ({ config, pkgs, ... }: {
+          nixpkgs.overlays = [
+            overlay-unstable
+            # Apply the overlay to disable Tailscale tests
+            overlay-tailscale
+          ];
+        })
+
+        ./configuration.nix
+        ./modules/applications.nix
+        ./modules/audio.nix
+        ./modules/desktop.nix
+        ./modules/development.nix
+        ./modules/hardware.nix
+        ./modules/networking.nix
+        ./modules/nvidia.nix
+        ./modules/services.nix
+        ./modules/tailscale.nix
+        ./modules/user.nix
+        
+      ];
     };
   };
 }

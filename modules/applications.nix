@@ -5,10 +5,11 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # Import unstable channel
-  nixpkgs.config.packageOverrides = pkgs: {
-    unstable = import <nixos-unstable> {config = pkgs.config;};
-  };
+  # Import unstable channel -- MOVED! 
+  # See main flake.nix & modules/applications.nix
+  # nixpkgs.config.packageOverrides = pkgs: {
+  #   unstable = import <nixos-unstable> {config = pkgs.config;};
+  # };
 
   environment = {
     systemPackages = with pkgs; [
@@ -45,16 +46,17 @@
       adwaita-icon-theme
       pandoc
 
-      # R tools
-      R
-      quarto
-
       # Input device tools
       keymapp # For ZSA Voyager configuration
       libinput # For trackpad debugging
       libinput-gestures
       solaar # For Logitech devices
-    ];
+
+    ] ++ (with pkgs.unstable; [
+      # R tools
+      R
+      quarto
+    ]);
 
     variables = {};
   };
