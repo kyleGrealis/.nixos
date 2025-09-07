@@ -78,7 +78,7 @@
   #
   home.sessionVariables = {
     # EDITOR = "emacs";
-    LS_COLORS = "$LS_COLORS:ow=01;32";
+    LS_COLORS = "$LS_COLORS:ow=00";
     HISTCONTROL = "ignoreboth:erasedups";
     HISTSIZE = "10000";
     HISTFILESIZE = "10000";
