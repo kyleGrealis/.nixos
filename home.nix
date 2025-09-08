@@ -78,7 +78,7 @@
   #
   home.sessionVariables = {
     # EDITOR = "emacs";
-    LS_COLORS = "$LS_COLORS:ow=00";
+    LS_COLORS = "$LS_COLORS:ow=1;34:tw=1;34:";
     HISTCONTROL = "ignoreboth:erasedups";
     HISTSIZE = "10000";
     HISTFILESIZE = "10000";
@@ -183,9 +183,9 @@
       [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
       [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
       
-      # Enable dircolors if available
-      if [ -x /usr/bin/dircolors ]; then
-          test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+      # Load custom dircolors
+      if [ -f ~/.dircolors ]; then
+        eval "$(dircolors -b ~/.dircolors)"
       fi
     '';
   };
@@ -225,17 +225,22 @@
   '';
 
   # git
+  programs.git.enable = true;
+  programs.git.lfs.enable = true;
+  
   home.file.".gitconfig".text = ''
-    [init]
-      defaultBranch = main
     [user]
-      name = Kyle Grealis
-      email = kyle@kyleGrealis.com
+    	name = Kyle Grealis
+    	email = kyle@kyleGrealis.com
     [credential]
-      helper = cache
+    	helper = cache
     [core]
-      excludesFile = ~/.gitignore
-      autocrlf = false
+    	excludesFile = ~/.gitignore
+    	autocrlf = false
+    [init]
+    	defaultBranch = main
+    [pull]
+    	rebase = true
   '';
   
 }

@@ -28,6 +28,7 @@
       gedit
       gimp3-with-plugins
       github-desktop
+      git-lfs
       gparted
       gpu-viewer
       kitty
