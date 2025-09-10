@@ -1,3 +1,5 @@
+# ./modules/home-manager/apps/kitty.nix
+
 { config, lib, ... }: {
   programs.kitty = {
     enable = true;

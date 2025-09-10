@@ -31,7 +31,20 @@ let
       # Show the last 5 lines which usually contain the actual error
       grep --color error nixos-switch.log | bat
       echo "================================"
-      echo "Full log saved to: nixos-switch.log"	
+      echo "Full log saved to: nixos-switch.log"
+      exit 1
+    )
+    
+    echo "Rebuilding NixOS Home Manager..."
+    home-manager switch --flake . &> nixos-hm.log \
+      && echo "✅ Home Manager rebuild complete" || (
+      echo "❌ Home Manager build failed! Error details:"
+      echo "================================"
+      # Show the last 5 lines which usually contain the actual error
+      grep --color error nixos-hm.log | bat
+      echo "================================"
+      echo "Full log saved to: nixos-hm.log"
+      exit 1
     )
 
     # Return to original directory

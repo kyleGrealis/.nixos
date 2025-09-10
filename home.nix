@@ -3,11 +3,7 @@
 {
 
   imports = [
-    ./modules/home-manager/bin/backup-dev.nix
-    ./modules/home-manager/bin/gitcheck.nix
-    ./modules/home-manager/bin/rebuild.nix
-    ./modules/home-manager/bin/scan-home.nix
-    ./modules/home-manager/bin/vpn-status.nix
+    ./modules/home-manager
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
