@@ -8,6 +8,7 @@
 
     # Scripts
     ./bin/backup-dev.nix
+    ./bin/create-nix.nix
     ./bin/gitcheck.nix
     ./bin/rebuild.nix
     ./bin/scan-home.nix
