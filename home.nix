@@ -108,8 +108,8 @@
       # Watch the tailnet log in live time as autoswitching occurs
       taillog () { tail -f /var/log/tailscale-autoswitch.log; }
       
-      # Custom prompt - recreating your original
-      PS1='\n\[\033[1;34m\]\W\[\033[0;35m\]$(parse_git_branch) \[\033[0m\]\n\[\033[0;32m\]\u@\h\[\033[0m\] >> '
+      # Custom prompt - recreating original
+      PS1='\n\[\033[1;34m\]\W\[\033[0;36m\]$(parse_git_branch) \[\033[0m\]\n\[\033[0;32m\]\u@\h\[\033[0m\] >> '
       
       # Add ~/.local/bin to PATH if it exists
       if [ -d "$HOME/.local/bin" ] ; then
