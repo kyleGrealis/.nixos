@@ -53,6 +53,7 @@
         })
 
         ./configuration.nix
+        
         ./modules/main/desktop.nix
         ./modules/main/networking.nix
         ./modules/main/nvidia.nix

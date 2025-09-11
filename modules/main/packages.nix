@@ -63,6 +63,8 @@
       gedit
       gimp3-with-plugins
       github-desktop
+      gnome-extension-manager
+      gnomeExtensions.user-themes
       gparted
       gpu-viewer
       kitty
@@ -97,7 +99,7 @@
     (import ../scripts/backup-dev.nix { inherit pkgs; }) ++
     (import ../scripts/create-nix.nix { inherit pkgs; }) ++
     (import ../scripts/gitcheck.nix { inherit pkgs; }) ++
-    (import ../scripts/rebuild.nix { inherit pkgs; }) ++
+    # (import ../scripts/rebuild.nix { inherit pkgs; }) ++
     (import ../scripts/scan-home.nix { inherit pkgs; }) ++
     (import ../scripts/vpn-status.nix { inherit pkgs; });
 
