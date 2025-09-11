@@ -50,14 +50,17 @@
       discord
       gedit
       gimp3-with-plugins
+
       gnome-extension-manager
       gnomeExtensions.user-themes
+
       gparted
       gpu-viewer
       kitty
       libreoffice
       nextcloud-client
       obs-studio
+      positron-bin
       slack
       spotify
       thunderbird
@@ -80,7 +83,6 @@
       # R tools
       R
       quarto
-      positron-bin
     ]) ++
     (import ../scripts/backup-dev.nix { inherit pkgs; }) ++
     (import ../scripts/create-nix.nix { inherit pkgs; }) ++
