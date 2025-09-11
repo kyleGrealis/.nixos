@@ -4,13 +4,16 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+
+    hyprland.url = "github:hyprwm/Hyprland";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, ... }: 
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, hyprland, ... }: 
   
   let
     system = "x86_64-linux";
@@ -38,6 +41,7 @@
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
 
       inherit system;
+      specialArgs = { inherit hyprland; };
       modules = [
 
         ({ config, pkgs, ... }: {
@@ -57,6 +61,7 @@
     homeConfigurations = {
       kyle = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
+        extraSpecialArgs = { inherit hyprland; };
         modules = [ ./home.nix ];
       };
     };

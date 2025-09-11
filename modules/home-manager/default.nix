@@ -3,7 +3,7 @@
 { config, ...}: {
   imports = [
     # Application-specific
-    ./apps/hyprland.nix
+    # ./apps/hyprland.nix
     ./apps/kitty.nix
 
     # Scripts

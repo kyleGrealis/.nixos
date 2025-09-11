@@ -46,6 +46,13 @@
       adwaita-icon-theme
       pandoc
 
+      # Wayland / Hyprland apps
+      # grim          # Screenshots
+      # slurp         # Screen selection for screenshots
+      # waybar        # Status bar (optional)
+      # wl-clipboard  # Clipboard for Wayland
+      # wofi          # Application launcher
+
       # Input device tools
       keymapp # For ZSA Voyager configuration
       libinput # For trackpad debugging

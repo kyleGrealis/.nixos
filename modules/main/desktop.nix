@@ -18,6 +18,23 @@
     };
   };
 
+  # Essential for Hyprland
+  # programs.hyprland = {
+  #   enable = true;
+  #   xwayland.enable = true;
+  # };
+
+  # # Essential services for Wayland/Hyprland
+  # services.xserver.displayManager.gdm.wayland = true;
+  
+  # # Portal for screensharing, etc.
+  # xdg.portal = {
+  #   enable = true;
+  #   extraPortals = with pkgs; [
+  #     xdg-desktop-portal-gtk
+  #   ];
+  # };
+
   fonts = {
     packages = with pkgs; [
       noto-fonts
