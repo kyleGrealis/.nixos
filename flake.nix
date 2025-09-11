@@ -53,7 +53,13 @@
         })
 
         ./configuration.nix
-        ./modules/main
+        ./modules/main/desktop.nix
+        ./modules/main/networking.nix
+        ./modules/main/nvidia.nix
+        ./modules/main/packages.nix
+        ./modules/main/services.nix
+        ./modules/main/tailscale.nix
+        ./modules/main/user.nix
         
       ];
     };

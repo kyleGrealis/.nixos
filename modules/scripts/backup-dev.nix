@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ...}:
+{ pkgs }:
 let
   backup-dev = pkgs.writeShellScriptBin "backup-dev" ''
     #!/usr/bin/env bash
@@ -39,6 +39,6 @@ let
     fi
   '';
 in
-{
-  home.packages = [ backup-dev ];
-}
+[
+  backup-dev
+]

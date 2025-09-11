@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ...}:
+{ pkgs }:
 let 
   rebuild = pkgs.writeShellScriptBin "rebuild" ''
     #!/usr/bin/env bash
@@ -51,6 +51,4 @@ let
     popd >/dev/null
   '';
 in 
-{
-  home.packages = [ rebuild ];
-}
+[ rebuild ]

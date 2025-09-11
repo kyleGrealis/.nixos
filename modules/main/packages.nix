@@ -1,12 +1,10 @@
-# modules/applications.nix
+# modules/packages.nix
 
 { pkgs, ... }: {
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # Import unstable channel -- MOVED! 
-  # See main flake.nix & modules/applications.nix
   # nixpkgs.config.packageOverrides = pkgs: {
   #   unstable = import <nixos-unstable> {config = pkgs.config;};
   # };
@@ -14,6 +12,43 @@
   environment = {
     systemPackages = with pkgs; [
       
+      bash
+      bash-completion
+      bat
+      btop
+      cifs-utils
+      curl
+      direnv
+      gfortran
+      git
+      gnumake
+      htop
+      libgcc
+      libxml2
+      micro
+      fastfetch
+      nmap
+      nix-bash-completions
+      nix-prefetch-git
+      nodejs
+      openssl
+      os-prober
+      pkg-config-unwrapped
+      python3Full
+      python312Packages.pip
+      ripgrep
+      rsync
+      samba
+      stow
+      tealdeer  # faster tldr
+      tree
+      unzip
+      vim
+      wget
+      which
+      xclip
+      yazi
+      zlib
 
       # Desktop applications
       ardour
@@ -53,13 +88,19 @@
       libinput-gestures
       solaar # For Logitech devices
 
-    ] ++ (with pkgs.unstable; [
+    ] ++ 
+    (with pkgs.unstable; [
       # R tools
       R
       quarto
-    ]);
+    ]) ++
+    (import ../scripts/backup-dev.nix { inherit pkgs; }) ++
+    (import ../scripts/create-nix.nix { inherit pkgs; }) ++
+    (import ../scripts/gitcheck.nix { inherit pkgs; }) ++
+    (import ../scripts/rebuild.nix { inherit pkgs; }) ++
+    (import ../scripts/scan-home.nix { inherit pkgs; }) ++
+    (import ../scripts/vpn-status.nix { inherit pkgs; });
 
-    variables = {};
   };
 
 }

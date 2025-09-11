@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ...}:
+{ pkgs }:
 let 
   create-nix = pkgs.writeShellScriptBin "create-nix" ''
     #!/usr/bin/env bash
@@ -67,6 +67,5 @@ EOF
 
       echo "✅ Created flake.nix"
   '';
-in {
-  home.packages = [ create-nix ];
-}
+in 
+[ create-nix ]

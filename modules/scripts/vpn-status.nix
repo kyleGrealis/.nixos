@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ...}:
+{ pkgs }:
 let 
   vpn-status = pkgs.writeShellScriptBin "vpn-status" ''
     #/usr/bin/env bash
@@ -41,6 +41,4 @@ let
     fi
   '';
 in 
-{
-  home.packages = [ vpn-status ];
-}
+[ vpn-status ]

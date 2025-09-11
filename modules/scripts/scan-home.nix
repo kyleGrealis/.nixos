@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ...}:
+{ pkgs }:
 let 
   scan-home = pkgs.writeShellScriptBin "scan-home" ''
     #!/usr/bin/env bash
@@ -19,6 +19,4 @@ let
     #fi
   '';
 in 
-{
-  home.packages = [ scan-home ];
-}
+[ scan-home ]

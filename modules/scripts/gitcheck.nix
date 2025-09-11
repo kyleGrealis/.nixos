@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ...}:
+{ pkgs }:
 let gitcheck = pkgs.writeShellScriptBin "gitcheck" ''
   #!/usr/bin/env bash
 
@@ -45,6 +45,4 @@ let gitcheck = pkgs.writeShellScriptBin "gitcheck" ''
   echo -e "✅ Done.\n"
 '';
 in 
-{
-  home.packages = [ gitcheck ];
-}
+[ gitcheck ]

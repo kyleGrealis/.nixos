@@ -1,6 +1,6 @@
 # modules/user.nix
 
-{ ...}: {
+{ ... }: {
 
   users.users.kyle = {
     isNormalUser = true;
@@ -8,10 +8,8 @@
     extraGroups = ["networkmanager" "wheel" "input"];
   };
 
-  # Set your time zone.
   time.timeZone = "America/Chicago";
 
-  # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
   i18n.extraLocaleSettings = {
