@@ -39,8 +39,11 @@ let
             positron-bin
             quarto
             R
-          ]
-          ++
+            # for LaTeX:
+            texlive.combined.scheme-medium
+            pkgs.tectonic
+          ]  ++
+          
           (with pkgs.rPackages; [
             devtools
             froggeR
