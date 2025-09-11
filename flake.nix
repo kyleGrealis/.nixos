@@ -10,10 +10,9 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
-    hyprland.url = "github:hyprwm/Hyprland";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, hyprland, ... }: 
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, ... }: 
   
   let
     system = "x86_64-linux";
@@ -41,7 +40,6 @@
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
 
       inherit system;
-      specialArgs = { inherit hyprland; };
       modules = [
 
         ({ config, pkgs, ... }: {
@@ -53,7 +51,7 @@
         })
 
         ./configuration.nix
-        
+
         ./modules/main/desktop.nix
         ./modules/main/networking.nix
         ./modules/main/nvidia.nix
@@ -68,7 +66,6 @@
     homeConfigurations = {
       kyle = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        extraSpecialArgs = { inherit hyprland; };
         modules = [ ./home.nix ];
       };
     };

@@ -12,6 +12,7 @@
         device = "nodev";
         efiSupport = true;
         useOSProber = true;
+        gfxmodeEfi = "3440x1440";
         fontSize = 32;
       };
     };
