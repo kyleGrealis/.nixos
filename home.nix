@@ -43,6 +43,7 @@
     shellAliases = {
       # git aliases
       ga = "git add";
+      gc = "git commit -m";
       gd = "git diff -U0";
       gst = "git status";
       gpull = "git pull";
@@ -55,7 +56,7 @@
       l = "ls -CF";
       
       # misc
-      code = "positron";
+      # code = "positron";
       now = "date +%F\\ %T";
       rsync = "rsync -azH --info=progress2";
       weather = "curl wttr.in/Dallas?0";
@@ -78,6 +79,12 @@
         cd "$@";
         ls -alh;
       }
+
+      # Launch Positron
+      code() {
+        nohup positron "$@" >/dev/null 2>&1 & disown
+      }
+
 
       # This function takes in a list of files and a commit message
       # Example: gam . 'initial commit'
