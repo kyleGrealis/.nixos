@@ -39,9 +39,10 @@ let
             positron-bin
             quarto
             R
+            
             # for LaTeX:
-            texlive.combined.scheme-medium
-            pkgs.tectonic
+            # texlive.combined.scheme-medium
+            # tectonic
           ]  ++
           
           (with pkgs.rPackages; [
