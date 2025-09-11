@@ -1,9 +1,5 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ pkgs, ... }: 
+let
   # Tailscale home mode script
   tailscale-home = pkgs.writeShellScriptBin "tailscale-home" ''
     echo "🏠 Switching to home mode..."

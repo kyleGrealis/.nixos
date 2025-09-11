@@ -1,7 +1,7 @@
 # modules/development.nix
 # This module is geared more at terminal tools & build essentials
 
-{ config, lib, pkgs, ... }: {
+{ pkgs, ... }: {
   environment.systemPackages = with pkgs; [
     bash
     bash-completion

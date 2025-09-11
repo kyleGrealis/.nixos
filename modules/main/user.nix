@@ -1,6 +1,6 @@
 # modules/user.nix
 
-{ config, lib, pkgs, ...}: {
+{ ...}: {
 
   users.users.kyle = {
     isNormalUser = true;

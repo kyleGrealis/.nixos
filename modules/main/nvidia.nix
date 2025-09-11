@@ -1,5 +1,5 @@
 # module/nvidia.nix
-{ config, lib, pkgs, ... }: {
+{ pkgs, ... }: {
   # Load NVIDIA driver for Xorg & Wayland
   hardware = {
     # Ref: https://wiki.nixos.org/wiki/NVIDIA

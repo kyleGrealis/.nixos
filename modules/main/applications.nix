@@ -1,6 +1,6 @@
 # modules/applications.nix
 
-{ config, lib, pkgs, ... }: {
+{ pkgs, ... }: {
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -46,13 +46,6 @@
       adwaita-icon-theme
       pandoc
       texlive.combined.scheme-medium
-
-      # Wayland / Hyprland apps
-      # grim          # Screenshots
-      # slurp         # Screen selection for screenshots
-      # waybar        # Status bar (optional)
-      # wl-clipboard  # Clipboard for Wayland
-      # wofi          # Application launcher
 
       # Input device tools
       keymapp # For ZSA Voyager configuration

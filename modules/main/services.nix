@@ -1,6 +1,6 @@
 # modules/services.nix
 
-{ config, lib, pkgs, ... }: {
+{ ... }: {
 
   # Enable the OpenSSH daemon - allows remote SSH connections TO this machine
   services.openssh.enable = true;
