@@ -1,4 +1,3 @@
 .smbsecrets
 smb-secrets
-nixos-switch.log
-nixos-hm.log
+*.log
