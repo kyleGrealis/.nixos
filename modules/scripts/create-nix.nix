@@ -22,28 +22,40 @@ let
   description = "R Data Science Project";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, flake-utils }:
+  outputs = { self, nixpkgs, nixpkgs-unstable, flake-utils }:
     flake-utils.lib.eachDefaultSystem (system:
+
       let
         pkgs = import nixpkgs {
           inherit system;
           config.allowUnfree = true; # For Positron
         };
+
+        pkgs-unstable = import nixpkgs-unstable {
+          inherit system;
+          config.allowUnfree = true;
+        };
+
       in {
         devShells.default = pkgs.mkShell {
           buildInputs = with pkgs; [
             positron-bin
             quarto
-            R
             
-            # for LaTeX:
-            # texlive.combined.scheme-medium
-            # tectonic
-          ]  ++
+            # for LaTeX
+            tectonic
+            texlive.combined.scheme-medium
+          ] ++
+
+          (with pkgs-unstable; [
+            # Latest R build
+            R
+          ]) ++ 
           
           (with pkgs.rPackages; [
             devtools
