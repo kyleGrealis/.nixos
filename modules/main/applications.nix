@@ -45,6 +45,7 @@
       # System tools
       adwaita-icon-theme
       pandoc
+      texlive.combined.scheme-medium
 
       # Wayland / Hyprland apps
       # grim          # Screenshots
