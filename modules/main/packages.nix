@@ -35,6 +35,7 @@
       vim
       wget
       which
+      wl-clipboard-rs
       xclip
       yazi
 
@@ -77,6 +78,21 @@
       libinput # For trackpad debugging
       libinput-gestures
       solaar # For Logitech devices
+
+      # Hyprland things
+      rofi-wayland
+      kdePackages.dolphin
+      nwg-displays
+      hyprcursor
+      cava  # music visualizer
+      dunst # notification daemon
+      qt6ct
+      waybar
+      wlogout
+      grimblast
+      slurp
+      jq
+      hyprpaper
 
     ] ++ 
     (with pkgs.unstable; [

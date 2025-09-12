@@ -5,7 +5,8 @@
   services.xserver = {
 
     # Enable the X11 windowing system.
-    enable = true;
+    # enable = true;
+    enable = false;
   
     # Enable the GNOME Desktop Environment
     displayManager.gdm.enable = true;
@@ -18,6 +19,9 @@
       variant = "";
     };
   };
+
+  programs.hyprland.enable = true;
+  programs.hyprland.xwayland.enable = true;
 
   fonts = {
     packages = with pkgs; [
