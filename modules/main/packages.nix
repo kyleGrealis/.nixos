@@ -61,6 +61,7 @@
       libreoffice
       nextcloud-client
       obs-studio
+      pavucontrol   # audio
       positron-bin
       slack
       spotify
@@ -74,6 +75,7 @@
       texlive.combined.scheme-medium
 
       # Input device tools
+      brightnessctl
       keymapp # For ZSA Voyager configuration
       libinput # For trackpad debugging
       libinput-gestures

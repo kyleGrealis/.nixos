@@ -28,8 +28,23 @@
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
 
-  hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = true;
+  # Bluetooth configuration
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    settings = {
+      General = {
+        # Shows battery percentage for devices that support it
+        Experimental = true;
+        # Faster connections at cost of slightly more power usage
+        FastConnectable = true;
+      };
+      Policy = {
+        # Auto-enable controllers when found
+        AutoEnable = true;
+      };
+    };
+  };
   services.blueman.enable = true;
 
   # ZSA Voyager keyboard support
