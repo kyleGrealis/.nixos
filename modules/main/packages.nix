@@ -41,10 +41,13 @@
 
       # Desktop applications
       ardour
+      bitwarden-desktop
       (brave.override {
         commandLineArgs = [
           "--enable-features=TouchpadOverscrollHistoryNavigation"
           "--ozone-platform=wayland"
+          # This removes the KDEWallet password thing when opening Brave
+          "--password-store=basic"
         ];
       })
       calibre
