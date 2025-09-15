@@ -1,27 +1,50 @@
 # modules/desktop.nix
 
-{ config, lib, pkgs, ... }: {
+{ config, lib, pkgs, ... }: 
 
+let
+  background-package = pkgs.runCommand "sddm-background" {} ''
+    cp ${../../sddm-background.jpg} $out
+  '';
+in {
+
+  # X11 configuration ----
+  # (required even for Wayland-only setups due to SDDM dependency)
   services.xserver = {
-
-    # Enable the X11 windowing system.
-    # enable = true;
-    enable = false;
-  
-    # Enable the GNOME Desktop Environment
-    displayManager.gdm.enable = true;
-    desktopManager.gnome.enable = true;
-    # displayManager.sddm.enable = true;
-
-    # Configure keymap in X11
-    xkb = {
-      layout = "us";
-      variant = "";
-    };
+    enable = true;
+    # Configure keymap (for both X11 & Wayland)
+    xkb.layout = "us";
+    xkb.variant = "";
   };
 
-  programs.hyprland.enable = true;
-  programs.hyprland.xwayland.enable = true;
+  # GNOME ----
+  services.xserver.displayManager.gdm.enable = false;
+  services.xserver.desktopManager.gnome.enable = false;
+
+  # Hyprland ----
+  programs.hyprland = {
+    enable = true;
+    withUWSM = true;
+    xwayland.enable = true;
+  };
+
+  # Enable SDDM ----
+  services.displayManager.sddm = {
+    enable = true;
+    wayland.enable = true;
+    theme = "chili";
+  };
+
+  # Enable background for SDDM theme ---
+  environment.systemPackages = [
+    (pkgs.writeTextDir "share/sddm/themes/chili/theme.conf.user" ''
+      [General]
+      background=${background-package}
+    '')
+  ];
+
+  # Optional: Hint Electron apps to use Wayland
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   fonts = {
     packages = with pkgs; [

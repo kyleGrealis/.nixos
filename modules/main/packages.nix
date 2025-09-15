@@ -86,15 +86,18 @@
 
       # Hyprland things
       rofi-wayland
+      xorg.xcursorthemes
+      rose-pine-hyprcursor
       kdePackages.dolphin
       nwg-displays
-      hyprcursor
+      hyprlock
       cava  # music visualizer
       dunst # notification daemon
       qt6ct
       waybar
       wlogout
       grimblast
+      sddm-chili-theme
       slurp
       jq
       hyprpaper
