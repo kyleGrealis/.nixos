@@ -37,14 +37,18 @@ in {
 
   # Enable background for SDDM theme ---
   environment.systemPackages = [
-    (pkgs.writeTextDir "share/sddm/themes/chili/theme.conf.user" ''
-      [General]
-      background=${background-package}
-    '')
+    # SDDM login background ----
+    # (pkgs.writeTextDir "share/sddm/themes/chili/theme.conf.user" ''
+    #   [General]
+    #   background=${background-package}
+    # '')
   ];
 
+  environment.sessionVariables = {
+  GTK_THEME = "Adwaita:dark";
   # Optional: Hint Electron apps to use Wayland
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  NIXOS_OZONE_WL = "1";
+};
 
   fonts = {
     packages = with pkgs; [

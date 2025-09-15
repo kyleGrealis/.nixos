@@ -21,6 +21,7 @@
       micro
       fastfetch
       nmap
+      networkmanagerapplet
       os-prober
       python3Full
       python312Packages.pip

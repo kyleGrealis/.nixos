@@ -1,6 +1,7 @@
 { ... }: {
 
   networking.networkmanager.enable = true;
+  programs.nm-applet.enable = true;
 
   # Mount piCloud over CIFS/SMB & tailnet:
   fileSystems."/home/kyle/piCloud" = {
